@@ -5,7 +5,7 @@ CardContent,
 CardHeader,   
 CardTitle
 }from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
 
 export const SignInCard = () => {
     return (
@@ -15,9 +15,21 @@ export const SignInCard = () => {
                     Welcome back!
                 </CardTitle>
             </CardHeader>
-            <div className="px-7 mb-2">
+            <div className="px-7">
                 <DottedSeparator  />
             </div>
-        </Card>
+        <CardContent className="p-7">
+            <form className="space-y-4">
+                <Input 
+                    required
+                    type="email"
+                    value={""}
+                    onChange={() => {}}
+                    placeholder="Enter email address"
+                    disabled= {false}
+                />
+            </form>   
+        </CardContent>
+    </Card>
     );
 };
