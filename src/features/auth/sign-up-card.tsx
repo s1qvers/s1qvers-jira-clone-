@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
@@ -20,7 +21,14 @@ export const SignUpCard = () => {
                     Sign Up
                 </CardTitle>
                 <CardDescription>
-                    
+                   By signing up, you agree to our{" "} 
+                   <Link href="/privacy">
+                        <span className="text-blue-700">Privacy Policy</span>
+                   </Link>{"  "}
+                    and{"  "}
+                   <Link href="/terms">
+                        <span className="text-blue-700">Privacy of Service</span>
+                   </Link>
                 </CardDescription>
             </CardHeader>
             <div className="px-7">
@@ -30,10 +38,10 @@ export const SignUpCard = () => {
             <form className="space-y-4">
                 <Input 
                     required
-                    type="email"
+                    type="text"
                     value={""}
                     onChange={() => {}}
-                    placeholder="Enter email address"
+                    placeholder="Enter your name"
                     disabled= {false}
                 />
                 <Input 
