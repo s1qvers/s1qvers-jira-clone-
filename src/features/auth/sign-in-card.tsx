@@ -1,10 +1,10 @@
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Button } from "@/components/ui/button";
 import { 
-Card,
-CardContent,
-CardHeader,   
-CardTitle
+    Card,
+    CardContent,
+    CardHeader,   
+    CardTitle
 }from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
@@ -44,6 +44,33 @@ export const SignInCard = () => {
                 </Button>
             </form>   
         </CardContent>
-    </Card>
+        <div className="px-7">
+            <DottedSeparator />
+        </div>
+        <CardContent className="p-7 flex-col gap-y-4">
+            <Button
+                disabled={false}
+                variant="secondary"
+                size="lg"
+                className="w-full"
+            >
+                Login with Google
+            </Button>
+            <Button
+                disabled={false}
+                variant="secondary"
+                size="lg"
+                className="w-full"
+            >
+                Login with GitHub
+            </Button>
+        </CardContent>
+    </Card>                    
     );
-};
+};        
+    
+
+
+
+
+                
