@@ -1,4 +1,5 @@
 import { DottedSeparator } from "@/components/dotted-separator";
+import { Button } from "@/components/ui/button";
 import { 
 Card,
 CardContent,
@@ -28,6 +29,19 @@ export const SignInCard = () => {
                     placeholder="Enter email address"
                     disabled= {false}
                 />
+                <Input 
+                    required
+                    type="password"
+                    value={""}
+                    onChange={() => {}}
+                    placeholder="Enter password "
+                    disabled= {false}
+                    min={8}
+                    max={256}
+                />
+                <Button disabled={false} size="lg" className="w-full">
+                    Login
+                </Button>
             </form>   
         </CardContent>
     </Card>
