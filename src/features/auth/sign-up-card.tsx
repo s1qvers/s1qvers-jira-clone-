@@ -143,6 +143,17 @@ export const SignUpCard = () => {
                     Sign Up with GitHub
                 </Button>
             </CardContent>
+            <div className="p-7">
+                <DottedSeparator />
+            </div>
+            <CardContent className="p-7 flex items-center justify-center">
+                <p>
+                    Already have an account?
+                    <Link href="/sign-in">
+                        <span className="text-blue-700">&nbsp;Sign In</span>
+                    </Link>
+                </p>
+            </CardContent>
         </Card>                    
     );
 };   

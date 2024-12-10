@@ -1,4 +1,5 @@
 import { z } from "zod";
+import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useForm } from "react-hook-form";
@@ -113,7 +114,18 @@ export const SignInCard = () => {
                     Login with GitHub
                 </Button>
             </CardContent>
-        </Card>                    
+            <div className="p-7">
+                <DottedSeparator />
+            </div>
+            <CardContent className="p-7 flex items-center justify-center">
+                <p>
+                    Don&apos;t have an account?
+                    <Link href="/sign-up">
+                        <span className="text-blue-700">&nbsp;Sign Up</span>
+                    </Link>
+                </p>
+            </CardContent>
+        </Card> 
     );
 };
 
