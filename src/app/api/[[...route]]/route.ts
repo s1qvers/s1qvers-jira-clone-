@@ -9,8 +9,8 @@ app.get("/hello", (c) => {
 
 app.get("/project/:projectId", (c) => {
   const projectId = c.req.param("projectId");
-  
+  console.log(projectId);
   return c.json({ project: projectId });
 });
 
-export const GET_handle = handle(app);
+export const GET = handle(app);
