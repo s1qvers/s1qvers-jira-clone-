@@ -5,6 +5,7 @@ import { deleteCookie, setCookie } from "hono/cookie";
 import { zValidator } from "@hono/zod-validator";
 
 import { createAdminClient } from "@/lib/appwrite";
+import { sessionMiddleware } from "@/lib/session-middleware";
 
 import { AUTH_COOKIE } from "../constants";
 import { loginSchema, registerSchema } from "../schemas";
@@ -63,7 +64,9 @@ const app = new Hono()
             return c.json({ success: true });
         }
     )
-    .post("/loqout", (c) => {
+    .post("/loqout", sessionMiddleware, (c) => {
+        const account = c.get("account");
+
         deleteCookie(c, AUTH_COOKIE)
 
         return c.json({ success: true });
