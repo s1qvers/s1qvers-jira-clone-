@@ -6,10 +6,14 @@ import { loginSchema } from "../schemas";
 
 const app = new Hono()
     .post(
-        "/login", 
+        "/login",
         zValidator("json", loginSchema),
-        (c) => {
-            return c.json({ success: 1234 });
+        async (c) => {
+            const { email, password, } = c.req.valid("json");
+
+            console.log({ email, password });
+
+            return c.json({ email, password });
         }
     );
 
