@@ -20,14 +20,14 @@ import { AUTH_COOKIE } from "@/features/auth/constants";
 type AdditinalContext = {
     Variables: {
         account: AccountType;
-        databses: DatabasesType;
+        databases: DatabasesType;
         storage: StorageType;
         users: UsersType;
         user: Models.User<Models.Preferences>;
     };
 };
 
-export const sessionMiddleware = createMiddleware(
+export const sessionMiddleware = createMiddleware<AdditinalContext>(
     async (c, next) => {
         const client = new Client()
             .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)

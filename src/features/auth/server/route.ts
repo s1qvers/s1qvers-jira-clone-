@@ -20,7 +20,7 @@ const app = new Hono()
             const { account } = await createAdminClient();
             const session = await account.createEmailPasswordSession(
                 email,
-                password
+                password,
             );
            
             setCookie(c, AUTH_COOKIE, session.secret, {
@@ -28,7 +28,7 @@ const app = new Hono()
                 httpOnly: true,
                 secure: true,
                 sameSite: "strict",
-                maxAge: 60 * 60 * 24 * 30 
+                maxAge: 60 * 60 * 24 * 30, 
             });
 
             return c.json({ success: true });
@@ -41,16 +41,16 @@ const app = new Hono()
             const { name, email, password } = c.req.valid("json"); 
 
             const { account } = await createAdminClient();
-            const user = await account.create(
+            await account.create(
                 ID.unique(),
                 email,
                 password,
-                name
+                name,
             );
 
             const session = await account.createEmailPasswordSession(
                 email,
-                password
+                password,
             );
 
             setCookie(c, AUTH_COOKIE, session.secret, {
@@ -58,16 +58,17 @@ const app = new Hono()
                 httpOnly: true,
                 secure: true,
                 sameSite: "strict",
-                maxAge: 60 * 60 * 24 * 30 
+                maxAge: 60 * 60 * 24 * 30 ,
             });
 
             return c.json({ success: true });
         }
     )
-    .post("/loqout", sessionMiddleware, (c) => {
+    .post("/loqout", sessionMiddleware, async (c) => {
         const account = c.get("account");
 
-        deleteCookie(c, AUTH_COOKIE)
+        deleteCookie(c, AUTH_COOKIE);
+        await account.deleteSession("current");
 
         return c.json({ success: true });
     });
