@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/form";
 
 import { loginSchema } from "./schemas";
-import { useLogin } from "@/lib/rpc";
+import { useLogin } from "./api/use-login";
 
 export const SignInCard = () => {
     const { mutate } = useLogin();
