@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation"; 
+
 import { useCurrent } from "@/features/auth/api/use-current";
 
 export default function Home() {
@@ -12,7 +13,7 @@ export default function Home() {
     if (!data && !isLoading) {
       router.push("/sign-in"); 
     }
-  }, [data, isLoading, router]); 
+  }, [data]); 
 
   return (
     <div>
