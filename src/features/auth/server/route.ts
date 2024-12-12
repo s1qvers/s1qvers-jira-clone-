@@ -18,7 +18,7 @@ const app = new Hono()
             const user = c.get("user");
     
             return c.json({ data: user });
-        },
+        }
     )   
     .post(
         "/login",
