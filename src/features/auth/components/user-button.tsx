@@ -14,8 +14,9 @@ import { useLogout } from "../api/use-logout";
 import { useCurrent } from "../api/use-current";
 
 export const UserButton = () => {
+    const { mutate: logout } = useLogout();
     const { data: user, isLoading } = useCurrent();
-
+    
     if (isLoading) {
         return (
             <div className="size-10 rounded-full flex items-center justify-center bg-neutral-200 border border-neutral-300">
@@ -58,7 +59,10 @@ export const UserButton = () => {
                     </div>
                 </div>
                 <DottedSeparator className="mb-1" />
-                <DropdownMenuItem className="h-10 flex items-center justify-center text-amber-700 font-medium cursor-pointer">
+                <DropdownMenuItem
+                onClick={() => logout()}
+                 className="h-10 flex items-center justify-center text-amber-700 font-medium cursor-pointer"
+                 >
                     <LogOut className="size-4 mr-2" />
                     log out
                 </DropdownMenuItem>
