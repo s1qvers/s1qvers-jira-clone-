@@ -11,7 +11,11 @@ export const useLogin = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   
-  const mutation = useMutation<ResponseType, Error, RequestType>({
+  const mutation = useMutation<
+  ResponseType,
+  Error,
+  RequestType
+  >({
     mutationFn: async ({ json }) => {
       const response = await client.api.auth.login["$post"]({ json });
       return await response.json();
