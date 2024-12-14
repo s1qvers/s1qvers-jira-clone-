@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
+import { Button } from "react-day-picker";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -47,6 +48,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
       <CardContent className="p-7">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="flex flex-col gap-y-4">
             <FormField
               control={form.control}
               name="name"
@@ -65,6 +67,13 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                 </FormItem>
               )}
             />
+            </div>
+            <DottedSeparator className="py-7" />
+            <div className="flex items-center justify-between">
+              <Button>
+
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent > 
