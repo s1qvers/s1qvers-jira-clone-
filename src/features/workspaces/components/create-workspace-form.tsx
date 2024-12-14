@@ -4,6 +4,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { Input } from "@/components/ui/input";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -44,7 +45,24 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
         <DottedSeparator />
       </div>
       <CardContent className="p-7">
-
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Workspace Name
+                  </FormLabel>
+                  <FormControl>
+                    <Input />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </form>
+        </Form>
       </CardContent > 
     </Card>
   )
