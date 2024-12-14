@@ -1,6 +1,8 @@
 import { Hono } from "hono";
+import { ID } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
 
+import { DATABASE_ID, WORKSPACES_ID } from "@/config";
 import { sessionMiddleware } from "@/lib/session-middleware";
 
 import { createWorkspaceSchema } from "../schemas";
@@ -14,10 +16,18 @@ const app = new Hono()
     const databases = c.get("databases");
     const user = c.get("user");
 
-    const { name } = с.req.valid("json");
+    const { name } = c.req.valid("json");
 
-    const workspaces = await databases.createDocument(
-        
+    const workspace = await databases.createDocument(
+        DATABASE_ID,
+        WORKSPACES_ID,
+        ID.unique(),
+        {
+            name,
+        }
+    );
+
+    return c.json({ data: workspace });
   }
 );
 
