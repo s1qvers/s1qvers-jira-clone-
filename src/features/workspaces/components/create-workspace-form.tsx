@@ -12,7 +12,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 
-import { createWorkspaceSchema } from "./schemas";
+import { createWorkspaceSchema } from "../schemas";
 
 interface CreateWorkspaceFormProps {
   onCancel: () => void;
