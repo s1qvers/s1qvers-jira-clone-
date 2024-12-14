@@ -9,8 +9,8 @@ export default async function Home() {
   if (!user) redirect("/sign-in");
 
   return (
-    <div>
-      <CreateWorkspaceForm onCancel={() => {}} />
+    <div className="bg-neutral-500">
+      <CreateWorkspaceForm />
     </div>
   );
 }
