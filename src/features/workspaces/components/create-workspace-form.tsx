@@ -18,12 +18,15 @@ import {
 } from "@/components/ui/form";
 
 import { createWorkspaceSchema } from "../schemas";
+import { useCreateWorkspace } from "../api/use-create-workspace";
 
 interface CreateWorkspaceFormProps {
   onCancel?: () => void;
 };
 
 export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
+  const { mutate, isPending } = useCreateWorkspace();
+  
   const form = useForm<z.infer<typeof createWorkspaceSchema>>({
     resolver: zodResolver(createWorkspaceSchema),
     defaultValues: {
@@ -32,7 +35,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
   });
 
   const onSubmit = (values: z.infer<typeof createWorkspaceSchema>) => {
-    console.log({ values });
+    mutate({ json: values });
   };
 
   return (
@@ -75,8 +78,16 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                 size="lg" 
                 variant="secondary" 
                 onClick={onCancel}
+                disabled={isPending}
               >
                 Cancel
+              </Button>
+              <Button
+                disabled={isPending}
+                type="submit"
+                size="lg"
+              >
+                Create Workspace
               </Button>
             </div>
           </form>
