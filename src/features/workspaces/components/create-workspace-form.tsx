@@ -56,8 +56,12 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                     Workspace Name
                   </FormLabel>
                   <FormControl>
-                    <Input />
+                    <Input 
+                    {...field}
+                    placeholder="Enter workspace name"
+                    />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
