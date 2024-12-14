@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
-import { Button } from "react-day-picker";
+import { Button } from "@/components/ui/button"; 
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -39,7 +39,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     <Card className="w-full h-full border-none shadow-none">
       <CardHeader className="flex p-7">
         <CardTitle className="text-xl font-bold">
-          Create a new CreateWorkspace
+          Create a new Workspace
         </CardTitle>
       </CardHeader>
       <div className="px-7">
@@ -49,34 +49,40 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Workspace Name
-                  </FormLabel>
-                  <FormControl>
-                    <Input 
-                    {...field}
-                    placeholder="Enter workspace name"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Workspace Name
+                    </FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field}
+                        placeholder="Enter workspace name"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
             <DottedSeparator className="py-7" />
             <div className="flex items-center justify-between">
-              <Button>
-
+              <Button
+                type="button"
+                size="lg" 
+                variant="secondary" 
+                onClick={onCancel}
+              >
+                Cancel
               </Button>
             </div>
           </form>
         </Form>
-      </CardContent > 
+      </CardContent> 
     </Card>
-  )
+  );
 };
+
