@@ -83,7 +83,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                 <div className="flex flex-col gap-y-2">
                   <div className="flex items-center gap-x-5">
                     {field.value ? (
-                      <div>
+                      <div className="size-[72px] relative rounded-md overflow-hidden">
                         <Image
                           alt="Logo"
                           fill
@@ -97,8 +97,8 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                       </div>
                     ) : (
                       <Avatar className="size-[72 px]">
-                        <AvatarFallback>
-                        <ImageIcon />
+                        <AvatarFallback> 
+                        <ImageIcon className="size-[36px] text-neutral-400" />
                         </AvatarFallback>
                       </Avatar>
                     )}
