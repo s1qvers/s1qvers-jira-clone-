@@ -2,8 +2,8 @@ import { Hono } from "hono";
 import { ID } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
 
-import { DATABASE_ID, WORKSPACES_ID } from "@/config";
 import { sessionMiddleware } from "@/lib/session-middleware";
+import { DATABASE_ID, IMAGES_BUCKET_ID, WORKSPACES_ID } from "@/config";
 
 import { createWorkspaceSchema } from "../schemas";
 
@@ -14,9 +14,20 @@ const app = new Hono()
   sessionMiddleware,
   async (c) => {
     const databases = c.get("databases");
+    const storage = c.get("storage");
     const user = c.get("user");
 
     const { name, image } = c.req.valid("json");
+
+    let uploadedImageUrl: string | undefined;
+
+    if ( image instanceof File ) {
+      const file = await storage.createFile(
+        IMAGES_BUCKET_ID,
+        ID.unique(),
+        image,
+      );
+    }
 
     const workspace = await databases.createDocument(
         DATABASE_ID,
