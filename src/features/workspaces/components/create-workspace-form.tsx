@@ -1,6 +1,7 @@
 "use client";
 
 import { z } from "zod";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -26,6 +27,8 @@ interface CreateWorkspaceFormProps {
 
 export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
   const { mutate, isPending } = useCreateWorkspace();
+
+  const inputRef = useRef<HTMLInputElement>(null);
   
   const form = useForm<z.infer<typeof createWorkspaceSchema>>({
     resolver: zodResolver(createWorkspaceSchema),
@@ -68,6 +71,15 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                     </FormControl>
                     <FormMessage />
                   </FormItem>
+                )}
+              />
+              <FormField 
+              control={form.control}
+              name ="image"
+              render={({ field }) => (
+                <FormItem>
+                  
+                </FormItem>
                 )}
               />
             </div>
