@@ -126,8 +126,8 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                           type="button"
                           disabled={isPending}
                           variant="teritary"
-                          size="lg"
-                          className="w-fit mt-2"
+                          size="xs"
+                          className="w-fit mt-2" 
                           onClick={() => inputRef.current?.click()}
                         >
                           Upload Image
@@ -145,12 +145,14 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                 onClick={onCancel}
                 disabled={isPending}
                 variant="secondary" 
+                size="lg" 
               >
                 Cancel
               </Button>
               <Button
                 disabled={isPending}
                 type="submit"
+                size="lg" 
               >
                 Create Workspace
               </Button>
@@ -161,6 +163,4 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     </Card>
   );
 };
-
-
 
