@@ -44,6 +44,13 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     mutate({ json: values });
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => { // Добавлены фигурные скобки
+    const file = e.target.files?.[0];
+    if (file) {
+      form.setValue("image", file);
+    }
+  };
+
   return (
     <Card className="w-full h-full border-none shadow-none">
       <CardHeader className="flex p-7">
@@ -77,33 +84,57 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                 )}
               />
               <FormField 
-              control={form.control}
-              name ="image"
-              render={({ field }) => (
-                <div className="flex flex-col gap-y-2">
-                  <div className="flex items-center gap-x-5">
-                    {field.value ? (
-                      <div className="size-[72px] relative rounded-md overflow-hidden">
-                        <Image
-                          alt="Logo"
-                          fill
-                          className="object-cover"
-                          src={
-                            field.value instanceof File
-                              ? URL.createObjectURL(field.value)
-                              : field.value
-                          }
-                         />
+                control={form.control}
+                name="image"
+                render={({ field }) => (
+                  <div className="flex flex-col gap-y-2">
+                    <div className="flex items-center gap-x-5">
+                      {field.value ? (
+                        <div className="size-[72px] relative rounded-md overflow-hidden">
+                          <Image
+                            alt="Logo"
+                            fill
+                            className="object-cover"
+                            src={
+                              field.value instanceof File
+                                ? URL.createObjectURL(field.value)
+                                : field.value
+                            }
+                          />
+                        </div>
+                      ) : (
+                        <Avatar className="size-[72px]">
+                          <AvatarFallback> 
+                            <ImageIcon className="size-[36px] text-neutral-400" />
+                          </AvatarFallback>
+                        </Avatar>
+                      )}
+                      <div className="flex flex-col"> 
+                        <p className="text-sm">Workspace Icon</p>
+                        <p className="text-sm text-muted-foreground">
+                          JPG, PNG, SVG or JPEG, max 1mb
+                        </p>
+                        <input
+                          className="hidden"
+                          type="file"
+                          accept=".jpg, .png, .jpeg, .svg"
+                          ref={inputRef}
+                          onChange={handleImageChange}
+                          disabled={isPending} 
+                        />
+                        <Button
+                          type="button"
+                          disabled={isPending}
+                          variant="teritary"
+                          size="xs"
+                          className="w-fit mt-2"
+                          onClick={() => inputRef.current?.click()}
+                        >
+                          Upload Image
+                        </Button>
                       </div>
-                    ) : (
-                      <Avatar className="size-[72 px]">
-                        <AvatarFallback> 
-                        <ImageIcon className="size-[36px] text-neutral-400" />
-                        </AvatarFallback>
-                      </Avatar>
-                    )}
+                    </div>
                   </div>
-                </div>
                 )}
               />
             </div>
@@ -111,8 +142,6 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
             <div className="flex items-center justify-between">
               <Button
                 type="button"
-                size="lg" 
-                variant="secondary" 
                 onClick={onCancel}
                 disabled={isPending}
               >
@@ -121,7 +150,6 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
               <Button
                 disabled={isPending}
                 type="submit"
-                size="lg"
               >
                 Create Workspace
               </Button>
@@ -132,4 +160,6 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     </Card>
   );
 };
+
+
 
