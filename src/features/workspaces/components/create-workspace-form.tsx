@@ -44,7 +44,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     mutate({ json: values });
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => { // Добавлены фигурные скобки
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       form.setValue("image", file);
@@ -144,6 +144,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                 type="button"
                 onClick={onCancel}
                 disabled={isPending}
+                variant="secondary" 
               >
                 Cancel
               </Button>
