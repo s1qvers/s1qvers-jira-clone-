@@ -1,4 +1,5 @@
-import { InferRequestType, InferResponseType } from "hono";
+import { toast } from "sonner";
+import { InferResponseType } from "hono";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { client } from "@/lib/rpc"; 
@@ -19,9 +20,13 @@ export const useLogout = () => {
       return await response.json();  
     },
     onSuccess: () => {
+      toast.success("Logged out");
       router.refresh(); 
       queryClient.invalidateQueries({ queryKey: ["current"] }); 
     },
+    onError: () => {
+      toast.error("Failed to log out");
+    }
   });
   
   return mutation;
