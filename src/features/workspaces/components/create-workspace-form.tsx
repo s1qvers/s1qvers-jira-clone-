@@ -1,14 +1,15 @@
 "use client";
 
 import { z } from "zod";
-import Image from "next/image";
 import { useRef } from "react";
+import Image from "next/image";
+import { ImageIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button"; 
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -84,6 +85,9 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                     {field.value ? (
                       <div>
                         <Image
+                          alt="Logo"
+                          fill
+                          className="object-cover"
                           src={
                             field.value instanceof File
                               ? URL.createObjectURL(field.value)
@@ -92,8 +96,10 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                          />
                       </div>
                     ) : (
-                      <Avatar>
-
+                      <Avatar className="size-[72 px]">
+                        <AvatarFallback>
+                        <ImageIcon />
+                        </AvatarFallback>
                       </Avatar>
                     )}
                   </div>
