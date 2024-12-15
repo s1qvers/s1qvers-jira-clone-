@@ -1,10 +1,12 @@
 "use client";
 
 import { z } from "zod";
+import Image from "next/image";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"; 
 import { DottedSeparator } from "@/components/dotted-separator";
@@ -77,9 +79,25 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
               control={form.control}
               name ="image"
               render={({ field }) => (
-                <FormItem>
-                  
-                </FormItem>
+                <div className="flex flex-col gap-y-2">
+                  <div className="flex items-center gap-x-5">
+                    {field.value ? (
+                      <div>
+                        <Image
+                          src={
+                            field.value instanceof File
+                              ? URL.createObjectURL(field.value)
+                              : field.value
+                          }
+                         />
+                      </div>
+                    ) : (
+                      <Avatar>
+
+                      </Avatar>
+                    )}
+                  </div>
+                </div>
                 )}
               />
             </div>
