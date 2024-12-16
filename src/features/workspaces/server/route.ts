@@ -43,7 +43,6 @@ const app = new Hono()
           file.$id,
         );
 
-        // Исправлено формирование URL изображения
         uploadedImageUrl = `data:image/png;base64,${Buffer.from(arrayBuffer).toString("base64")}`;
       }
 
