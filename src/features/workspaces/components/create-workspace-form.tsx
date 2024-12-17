@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -67,7 +68,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     <Card className="w-full h-full border-none shadow-none">
       <CardHeader className="flex p-7">
         <CardTitle className="text-xl font-bold">
-          Create a new Workspace
+          Create a new workspace
         </CardTitle>
       </CardHeader>
       <div className="px-7">
@@ -154,10 +155,11 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
             <div className="flex items-center justify-between">
               <Button
                 type="button"
+                size="lg"
+                variant="secondary"
                 onClick={onCancel}
                 disabled={isPending}
-                variant="secondary" 
-                size="lg" 
+                className={cn}
               >
                 Cancel
               </Button>
