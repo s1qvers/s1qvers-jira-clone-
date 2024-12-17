@@ -5,13 +5,14 @@ import { ResponsiveModal } from "@/components/responsive-modal";
 import { CreateWorkspaceForm } from "./create-workspace-form";
 
 import { useCreateWorkspaceModal } from "../hooks/use-create-workspace-modal";
+import { Close } from "@radix-ui/react-dialog";
 
 export const CreateWorkspaceModal = () => {
-  const { isOpen, setIsOpen } = useCreateWorkspaceModal();
+  const { isOpen, setIsOpen, close } = useCreateWorkspaceModal();
 
   return (
     <ResponsiveModal open={isOpen} onOpenChange={setIsOpen}>
-      <CreateWorkspaceForm />
+      <CreateWorkspaceForm onCancel={close} />
     </ResponsiveModal>
   );
 };
