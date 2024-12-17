@@ -146,6 +146,6 @@ const app = new Hono()
       
       return c.json({ data: workspace });
     }
-  )
+  );
 
 export default app;
