@@ -115,7 +115,36 @@ const app = new Hono()
         return c.json({ error: "Unauthorized" }, 401);
       }
 
+      let uploadedImageUrl;
+
+      if (image instanceof File) {
+        const file = await storage.createFile(
+          IMAGES_BUCKET_ID,
+          ID.unique(),
+          image,
+        );
+
+        const arrayBuffer = await storage.getFilePreview(
+          IMAGES_BUCKET_ID,
+          file.$id,
+        );
+
+        uploadedImageUrl = `data:image/png;base64,${Buffer.from(arrayBuffer).toString("base64")}`;
+      } else {
+        uploadedImageUrl = image;
+      }
+
+      const workspace = await databases.updateDocument(
+        DATABASE_ID,
+        WORKSPACES_ID,
+        workspaceId,
+        {
+          name,
+          imageUrl: uploadedImageUrl
+        }
+      );
       
+      return c.json({ data: workspace });
     }
   )
 
