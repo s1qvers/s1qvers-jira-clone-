@@ -3,6 +3,7 @@ import { ID, Query } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
 
 import { MemberRole } from "@/features/members/types";
+import { getMember } from "@/features/members/utils";
 
 import { generateInviteCode } from "@/lib/utils";
 import { sessionMiddleware } from "@/lib/session-middleware";
@@ -104,7 +105,17 @@ const app = new Hono()
       const { workspaceId } = c.req.param();
       const { name, image } = c.req.valid("form");
 
-      const member = null;
+      const member = await getMember({
+        databases,
+        workspaceId,
+        userId: user.$id,
+      });
+
+      if (!member || member.role !== MemberRole.ADMIN) {
+        return c.json({ error: "Unauthorized" }, 401);
+      }
+
+      
     }
   )
 
