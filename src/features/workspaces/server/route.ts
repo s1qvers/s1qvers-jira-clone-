@@ -165,6 +165,13 @@ const app = new Hono()
       if (!member || member.role !== MemberRole.ADMIN) {
         return c.json({ error: "Unauthorized" }, 401);
       }
+
+      await databases.deleteDocument(
+        DATABASE_ID,
+        WORKSPACES_ID,
+        workspaceId,
+      );
+      
     }
   )
 
