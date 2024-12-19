@@ -3,9 +3,9 @@
 import { z } from "zod";
 import { useRef } from "react";
 import Image from "next/image";
-import { ImageIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { ArrowLeftIcon, ImageIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { cn } from "@/lib/utils";
@@ -72,7 +72,11 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }:EditWorkspaceFormP
 
   return (
     <Card className="w-full h-full border-none shadow-none">
-      <CardHeader className="flex p-7">
+      <CardHeader className="flex flex-row items-center gap-x-4 p-7 space-y-0">
+        <Button size="sm" variant="secondary" onClick={onCancel ? onCancel : () => router.push(`/workspaces/${initialValues.$id}`)}>
+        <ArrowLeftIcon className="size-4 mr-2" />
+          Back
+        </Button>
         <CardTitle className="text-xl font-bold">
           {initialValues.name}
         </CardTitle>
@@ -174,7 +178,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }:EditWorkspaceFormP
                 type="submit"
                 size="lg" 
               >
-                Create Workspace
+                Save Changes
               </Button>
             </div>
           </form>
