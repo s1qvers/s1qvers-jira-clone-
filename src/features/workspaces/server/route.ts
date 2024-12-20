@@ -196,16 +196,16 @@ const app = new Hono()
         return c.json({ error: "Unauthorized" }, 401);
       }
 
-      await databases.updateDocument(
+      const workspace = await databases.updateDocument(
         DATABASE_ID,
         WORKSPACES_ID,
         workspaceId,
         {
-          inviteCode: generateInviteCode(10),
+          inviteCode: generateInviteCode(6),
         },
       );
 
-      return c.json({ data: { $id: workspaceId } });
+      return c.json({ data: workspace });
     }
   );
 

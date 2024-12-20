@@ -96,6 +96,8 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }:EditWorkspaceFormP
     }
   };
 
+  const fullInviteLink = `${window.location.origin}/workspaces/${initialValues.$id}/join/${initialValues.inviteCode}`;
+
   return (
   <div className="flex flex-col gap-y-4">
   <DeleteDialog />
@@ -231,6 +233,40 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }:EditWorkspaceFormP
         </Form>
       </CardContent> 
     </Card>
+
+    <Card className="w-full h-full border-none shadow-none">
+      <CardContent className="p-7">
+        <div className="flex flex-col">
+          <h3 className="font-bold">Invite Members</h3>
+          <p className="text-sm text-muted-foreground">
+            Use the invite link to add members to your workspace.
+          </p>
+          <div className="mt-4">
+            <div className="flex items-center gap-x-2">
+                <Input disabled value={fullInviteLink} />
+                <Button
+                  onClick={() => {}}
+                  variant="secondary"
+                  className="size-12"
+                >
+                  <CopyIcon />
+                </Button>
+            </div>
+          </div>
+          <Button
+            className="mt-6 w-fit ml-auto"
+            size="sm"
+            variant="destructive"
+            type="button"
+            disabled={isPending || isDeletingWorkspace}
+            onClick={handleDelete}
+          >
+            Delete Workspace
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+
     <Card className="w-full h-full border-none shadow-none">
       <CardContent className="p-7">
         <div className="flex flex-col">
