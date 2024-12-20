@@ -93,11 +93,11 @@ const handleDelete = async () => {
       param: { workspaceId: initialValues.$id },
     }, {
       onSuccess: () => {
-        
+       router.refresh();
       },
     });
   };
-  
+
   const onSubmit = (values: z.infer<typeof updateWorkspaceSchema>) => {
     const finalValues = {
       ...values,
