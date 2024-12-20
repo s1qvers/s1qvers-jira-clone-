@@ -29,6 +29,7 @@ import { Workspace } from "../types";
 import { updateWorkspaceSchema } from "../schemas";
 import { useUpdateWorkspace } from "../api/use-update-workspace";
 import { useDeleteWorkspace } from "../api/use-delete-workspace";
+import { useResetInviteCode } from "../api/use-reset-invite-code";
 
 interface EditWorkspaceFormProps {
   onCancel?: () => void;
@@ -42,10 +43,20 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
     mutate: deleteWorkspace,
     isPending: isDeletingWorkspace 
   } = useDeleteWorkspace();
+  const {
+    mutate: resetInviteCode,
+    isPending: isResettingInviteCode 
+  } = useResetInviteCode();
 
   const [DeleteDialog, confirmDelete] = useConfirm(
     "Delete Workspace",
     "This action cannot be undone.",
+    "destructive",
+  );
+
+  const [ResetDialog, confirmReset] = useConfirm(
+    "Reset invite link",
+    "This will invalidate the current invite link",
     "destructive",
   );
 
@@ -59,7 +70,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
     },
   });
 
-  const handleDelete = async () => {
+const handleDelete = async () => {
     const ok = await confirmDelete();
 
     if (!ok) return;
@@ -73,6 +84,20 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
     });
   };
 
+  const handleResetInviteCode = async () => {
+    const ok = await confirmReset();
+
+    if (!ok) return;
+
+    resetInviteCode({
+      param: { workspaceId: initialValues.$id },
+    }, {
+      onSuccess: () => {
+        
+      },
+    });
+  };
+  
   const onSubmit = (values: z.infer<typeof updateWorkspaceSchema>) => {
     const finalValues = {
       ...values,
@@ -85,7 +110,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
     }, {
       onSuccess: ({ data }) => {
         form.reset();
-        router.push(`/workspaces/${data.$id}`); // Исправлено здесь
+        router.push(`/workspaces/${data.$id}`); 
       }
     });
   };
@@ -107,6 +132,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
   return (
     <div className="flex flex-col gap-y-4">
       <DeleteDialog />
+      <ResetDialog />
       <Card className="w-full h-full border-none shadow-none">
         <CardHeader className="flex flex-row items-center gap-x-4 p-7 space-y-0">
           <Button size="sm" variant="secondary" onClick={onCancel ? onCancel : () => router.push(`/workspaces/${initialValues.$id}`)}>
@@ -265,8 +291,8 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
               size="sm"
               variant="destructive"
               type="button"
-              disabled={isPending || isDeletingWorkspace}
-              onClick={handleDelete}
+              disabled={isPending || isResettingInviteCode}
+              onClick={handleResetInviteCode}
             >
               Reset invite link
             </Button>
@@ -281,6 +307,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
             <p className="text-sm text-muted-foreground">
               Deleting a workspace is irreversible and will remove all associated data.
             </p>
+            <DottedSeparator className="py-7" />
             <Button
               className="mt-6 w-fit ml-auto"
               size="sm"
