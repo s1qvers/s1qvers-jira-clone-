@@ -33,7 +33,7 @@ export const JoinWorkspaceForm = ({
           <DottedSeparator />
         </div>
         <CardContent className="p-7">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col lg:flex-row items-center justify-between">
             <Button>
                Cancel
             </Button>
